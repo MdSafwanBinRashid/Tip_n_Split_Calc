@@ -1,0 +1,185 @@
+#:kivy 2.0
+#:import rgba kivy.utils.rgba
+
+<TipCalculator>:
+    orientation: 'vertical'
+    spacing: 20
+    padding: 30
+
+    canvas.before:
+        Color:
+            rgba: rgba('#f0f4f8') 
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # --- Header ---
+    Label:
+        text: 'Tip & Split Calculator'
+        size_hint_y: None
+        height: 60
+        font_size: '28sp'
+        bold: True
+        color: rgba('#1a2a3a')
+        # Optional subtle shadow effect
+        canvas.before:
+            Color:
+                rgba: rgba('#ffffff')
+            Rectangle:
+                pos: self.x - 2, self.y - 2
+                size: self.size
+
+    # --- Bill Amount Section ---
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: 100
+        spacing: 8
+
+        Label:
+            text: 'Bill Amount'
+            size_hint_y: None
+            height: 30
+            font_size: '16sp'
+            bold: True
+            color: rgba('#2c3e50')
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        TextInput:
+            id: bill_input_field
+            input_filter: 'float'
+            multiline: False
+            on_text: root.bill_input = self.text
+            size_hint_y: None
+            height: 60
+            background_color: rgba('#ffffff')
+            foreground_color: rgba('#2c3e50')
+            cursor_color: rgba('#3498db')
+            padding: [15, 12, 15, 12]
+            font_size: '16sp'
+
+    # --- Tip Result Display ---
+    Label:
+        id: result_label
+        text: root.tip_output
+        size_hint_y: None
+        height: 60
+        font_size: '18sp'
+        bold: True
+        color: rgba('#27ae60') 
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    # --- Split Section ---
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: 100
+        spacing: 8
+
+        Label:
+            text: 'Split Between'
+            size_hint_y: None
+            height: 30
+            font_size: '16sp'
+            bold: True
+            color: rgba('#2c3e50')
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        TextInput:
+            id: num_people_field
+            input_filter: 'int'
+            multiline: False
+            on_text: root.num_people = self.text
+            size_hint_y: None
+            height: 60
+            background_color: rgba('#ffffff')
+            foreground_color: rgba('#2c3e50')
+            cursor_color: rgba('#3498db')
+            padding: [15, 12, 15, 12]
+            font_size: '16sp'
+
+    # --- Split Result Display ---
+    Label:
+        id: split_label
+        text: root.split_output
+        size_hint_y: None
+        height: 60
+        font_size: '18sp'
+        bold: True
+        color: rgba('#2980b9')  
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    # --- Tip Percentage Buttons ---
+    GridLayout:
+        cols: 3
+        spacing: 20
+        size_hint_y: None
+        height: 60
+
+        Button:
+            text: '15%'
+            background_normal: ''
+            background_color: rgba('#e67e22')  
+            color: rgba('#ffffff')
+            bold: True
+            font_size: '16sp'
+            on_release: root.btn_click_calc_tip(15)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]
+
+        Button:
+            text: '20%'
+            background_normal: ''
+            background_color: rgba('#3498db')  
+            color: rgba('#ffffff')
+            bold: True
+            font_size: '16sp'
+            on_release: root.btn_click_calc_tip(20)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]
+
+        Button:
+            text: '25%'
+            background_normal: ''
+            background_color: rgba('#9b59b6')  
+            color: rgba('#ffffff')
+            bold: True
+            font_size: '16sp'
+            on_release: root.btn_click_calc_tip(25)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]
+
+    # --- Subtle footer ---
+    Label:
+        text: 'Enter bill > select tip % > see total & split'
+        size_hint_y: None
+        height: 40
+        font_size: '12sp'
+        italic: True
+        color: rgba('#7f8c8d')
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
